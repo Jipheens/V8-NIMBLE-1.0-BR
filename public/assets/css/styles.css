@@ -752,53 +752,153 @@ body.copilot-theme .legacy-taskbar {
   padding: 1.25rem;
 }
 
-/* Modal Styling */
+/* Modal Styling - Unified Blue Header */
 .copilot-theme .modal-content {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 16px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
 .copilot-theme .modal-header {
-  background: transparent !important;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  color: #1e293b !important;
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  border-bottom: none;
+  color: #ffffff;
+  padding: 1rem 1.5rem;
 }
 
-/* Client Maintenance */
+.copilot-theme .modal-title {
+  font-weight: 700;
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+
+/* Window Control Buttons - White and Visible */
+.copilot-theme .window-controls {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.copilot-theme .window-control {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-size: 0.9rem;
+  padding: 0.4rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copilot-theme .window-control:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.copilot-theme .window-control--close:hover {
+  background: #ef4444;
+  border-color: #dc2626;
+  color: white;
+}
+
+/* Client Maintenance Specific */
 .copilot-theme .cm-legacy-nav {
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: #f8fafc !important;
   border-right: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* DataEntry Button - Should NOT be blue */
+.copilot-theme .cm-dataentry-toggle,
+.copilot-theme .cm-legacy-nav__header button {
+  background: #ffffff !important;
+  color: #1e293b !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.copilot-theme .cm-dataentry-toggle:hover {
+  background: #f1f5f9 !important;
+}
+
+.copilot-theme .cm-legacy-nav__header {
+  background: #f8fafc !important;
+  color: #1e293b !important;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.copilot-theme .cm-legacy-nav__eyebrow {
+  color: #64748b !important;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .copilot-theme .card-surface,
 .copilot-theme .cm-panel-card {
-  background: rgba(255, 255, 255, 0.7) !important;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 12px;
+}
+
+.copilot-theme .cm-top-identifiers {
+  background: #f8fafc !important;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Small Icon Buttons (Search, Add, etc.) - Make them visible */
+.copilot-theme .input-group .btn,
+.copilot-theme .input-group button,
+.copilot-theme button[data-client-search],
+.copilot-theme button[data-id-lookup],
+.copilot-theme .btn-outline-secondary.btn-sm,
+.copilot-theme .input-group-text+button {
+  background: #64748b !important;
+  border: 1px solid #475569 !important;
+  color: #ffffff !important;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.copilot-theme .input-group .btn:hover,
+.copilot-theme .input-group button:hover,
+.copilot-theme button[data-client-search]:hover,
+.copilot-theme button[data-id-lookup]:hover {
+  background: #475569 !important;
+  border-color: #334155 !important;
+}
+
+/* Icon-only buttons */
+.copilot-theme .btn i,
+.copilot-theme button i {
+  color: inherit;
 }
 
 /* Taskbar Elements */
 .copilot-theme .taskbar-clock {
-  color: #334155 !important;
+  color: #e2e8f0 !important;
   font-weight: 600;
 }
 
 .copilot-theme .taskbar-item {
-  color: #475569;
+  color: #cbd5e1;
   border-radius: 8px;
   transition: all 0.2s ease;
 }
 
 .copilot-theme .taskbar-item:hover,
 .copilot-theme .taskbar-item.is-active {
-  background: rgba(37, 99, 235, 0.1);
-  color: #2563eb;
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
 }
 
 .copilot-theme .start-button {
@@ -812,6 +912,119 @@ body.copilot-theme .legacy-taskbar {
 .copilot-theme .start-button:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+/* Button Styling for Client Maintenance and Forms */
+.copilot-theme .btn-primary,
+.copilot-theme button[type="submit"],
+.copilot-theme .btn.btn-primary {
+  background: linear-gradient(135deg, #10b981, #059669) !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+  transition: all 0.2s ease;
+}
+
+.copilot-theme .btn-primary:hover,
+.copilot-theme button[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+  background: linear-gradient(135deg, #059669, #047857) !important;
+}
+
+.copilot-theme .btn-outline-secondary,
+.copilot-theme .btn-secondary {
+  background: #94a3b8 !important;
+  border: 1px solid #64748b !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  transition: all 0.2s ease;
+}
+
+.copilot-theme .btn-outline-secondary:hover,
+.copilot-theme .btn-secondary:hover {
+  background: #64748b !important;
+  border-color: #475569 !important;
+  transform: translateY(-1px);
+}
+
+.copilot-theme .btn-danger,
+.copilot-theme button.btn-danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(239, 68, 68, 0.2);
+}
+
+.copilot-theme .btn-danger:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c) !important;
+  transform: translateY(-1px);
+}
+
+/* Inline Action Buttons (View, Add, Edit, Delete) */
+.copilot-theme .cm-inline-actions button,
+.copilot-theme .btn-outline-primary {
+  background: #3b82f6 !important;
+  border: 1px solid #2563eb !important;
+  color: #ffffff !important;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 0.4rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.copilot-theme .cm-inline-actions button:hover,
+.copilot-theme .btn-outline-primary:hover {
+  background: #2563eb !important;
+  border-color: #1d4ed8 !important;
+  transform: translateY(-1px);
+}
+
+/* Small action buttons in tables */
+.copilot-theme .btn-sm,
+.copilot-theme .btn-outline-secondary.btn-sm {
+  background: #64748b !important;
+  border: 1px solid #475569 !important;
+  color: #ffffff !important;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.copilot-theme .btn-sm:hover {
+  background: #475569 !important;
+}
+
+/* Fix Z-Index Hierarchy - Start Menu Always on Top When Visible */
+.modal-backdrop {
+  z-index: 1040 !important;
+  /* Bootstrap default */
+}
+
+.legacy-modal.modal {
+  z-index: 1050 !important;
+  /* Bootstrap default for modals */
+}
+
+/* Start menu and taskbar should be highest */
+.legacy-taskbar {
+  z-index: 10000 !important;
+}
+
+.start-menu {
+  z-index: 10001 !important;
+  /* Always on top */
+}
+
+.start-overlay {
+  z-index: 9999 !important;
 }
 
 .legacy-status-bar .status-pill {
