@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bankers Realm .NET · Sign in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body data-page="login" class="auth-page">
+  <main class="authBackground">
+    <div class="container auth-container">
+      <div class="row auth-main justify-content-center">
+        <div class="col-12">
+          <div class="form-box mx-auto">
+            <div class="auth-wrapper text-center">
+              <div class="mb-4">
+                <img src="assets/images/silvicon.png" class="brand-logo" alt="Craft Silicon" />
+              </div>
+              <h2 class="brand-title">Bankers Realm .NET</h2>
+              <h3 class="brand-subtitle">Sign in</h3>
+
+              <form id="loginForm" class="validate-form mt-4" novalidate>
+                <div class="mb-3">
+                  <label class="form-label text-start w-100" for="operatorId">Operator ID</label>
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                    <input type="text" class="form-control" id="operatorId" name="operatorId"
+                      placeholder="Enter Operator ID" required />
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label text-start w-100" for="password">Password</label>
+                  <div class="input-group input-group-lg">
+                    <span class="input-group-text"><i class="bi bi-shield-lock-fill"></i></span>
+                    <input type="password" class="form-control" id="password" name="password"
+                      placeholder="Enter Password" required />
+                    <button type="button" class="btn btn-link show-pwd-icon" data-toggle-password="password"
+                      aria-label="Toggle password visibility">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  <label class="form-label text-start w-100" for="branch">Branch</label>
+                  <select class="form-select form-select-lg" id="branch" name="branchId" required>
+                    <option value="" disabled selected>Select a branch</option>
+                    <option value="000">Head Office</option>
+                    <option value="001">Westlands Branch</option>
+                    <option value="002">Industrial Area</option>
+                  </select>
+                </div>
+
+                <div id="loginFeedback" class="alert alert-danger d-none" role="alert"></div>
+
+                <button type="submit" class="btn dark-blue-button auth-form-btn w-100" aria-live="polite">Login</button>
+              </form>
+
+              <div class="badge badge-solid-blue mt-4 bg-transparent text-primary">
+                <a href="#" class="text-decoration-none fw-semibold">Forgot Password?</a>
+              </div>
+
+              <p class="login-footer mt-5 text-muted small">
+                Powered by <span class="fw-bold">Nimble Systems</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Auth Services -->
+  <script src="assets/js/auth/auth.config.js"></script>
+  <script src="assets/js/auth/auth.service.js"></script>
+  <!-- Main App -->
+  <script src="assets/js/app.js"></script>
+  <script>
+    // Simple password toggle logic
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll("[data-toggle-password]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          const targetId = button.getAttribute("data-toggle-password");
+          const input = document.getElementById(targetId);
+          if (!input) return;
+          const isMasked = input.type === "password";
+          input.type = isMasked ? "text" : "password";
+          const icon = button.querySelector("i");
+          if (icon) {
+            icon.classList.toggle("bi-eye");
+            icon.classList.toggle("bi-eye-slash");
+          }
+        });
+      });
+    });
+  </script>
+</body>
+
+</html>

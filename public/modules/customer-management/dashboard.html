@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Customer Management Desktop</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../../assets/css/styles.css" />
+</head>
+
+<body class="legacy-desktop copilot-theme" data-page="module-dashboard">
+  <div class="modal-body modal-body--iframe">
+    <iframe class="legacy-modal__iframe" src="client-maintenance.html" title="Client Maintenance Workspace"
+      loading="lazy"></iframe>
+  </div>
+  <div class="modal-footer justify-content-between flex-wrap gap-2">
+    <small class="text-muted">This window loads the rebuilt client maintenance page.</small>
+    <div class="d-flex gap-2">
+      <a class="btn btn-outline-secondary" href="client-maintenance.html" target="_blank" rel="noopener">Open Full
+        Page</a>
+      <button class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+    </div>
+  </div>
+  <span class="window-status status-warning">Due</span>
+  </header>
+  <div class="window-body">
+    <div class="window-card">
+      <p class="label">Draft requests</p>
+      <p class="value">3</p>
+    </div>
+    <div class="window-card">
+      <p class="label">Documents missing</p>
+      <p class="value">5</p>
+    </div>
+    <div class="window-card">
+      <p class="label">SLA</p>
+      <p class="value">4 hrs</p>
+    </div>
+  </div>
+  <footer>
+    <button class="btn btn-sm btn-ghost">Resume last</button>
+    <div class="window-actions">
+      <i class="far fa-window-minimize"></i>
+      <i class="far fa-square"></i>
+      <i class="far fa-times-circle"></i>
+    </div>
+  </footer>
+  </article>
+
+  <article class="desktop-window" data-launch-modal="workflowModal">
+    <header>
+      <div>
+        <h5>Workflow Queue</h5>
+        <small>Loan &amp; onboarding approvals routed to you</small>
+      </div>
+      <span class="window-status status-idle">Idle</span>
+    </header>
+    <div class="window-body">
+      <div class="window-card">
+        <p class="label">Today</p>
+        <p class="value">28</p>
+      </div>
+      <div class="window-card">
+        <p class="label">Aging &gt; 1d</p>
+        <p class="value">2</p>
+      </div>
+      <div class="window-card">
+        <p class="label">Escalations</p>
+        <p class="value">0</p>
+      </div>
+    </div>
+    <footer>
+      <button class="btn btn-sm btn-ghost">Review queue</button>
+      <div class="window-actions">
+        <i class="far fa-window-minimize"></i>
+        <i class="far fa-square"></i>
+        <i class="far fa-times-circle"></i>
+      </div>
+    </footer>
+  </article>
+  </div>
+  </section>
+  </div>
+
+  <footer class="legacy-taskbar">
+    <div class="taskbar-left">
+      <button class="start-button" data-start-toggle>
+        <i class="fa-brands fa-windows"></i>
+        <span>Start</span>
+      </button>
+      <div class="taskbar-divider"></div>
+      <div class="taskbar-windows">
+        <button class="taskbar-item is-active" data-bind-modal="clientModal"><i class="fas fa-user"></i> Client
+          Maintenance</button>
+        <button class="taskbar-item" data-bind-modal="overdraftModal"><i class="fas fa-file-lines"></i>
+          Overdraft</button>
+        <button class="taskbar-item" data-bind-modal="workflowModal"><i class="fas fa-list-check"></i> Workflow</button>
+      </div>
+    </div>
+    <div class="taskbar-clock">
+      <span>08 May 2025</span>
+      <strong>11:24 AM</strong>
+    </div>
+    <div class="start-menu" data-start-menu>
+      <div class="start-menu__profile">
+        <div>
+          <p class="mb-0">CSADM</p>
+          <small>Customer Services Admin</small>
+        </div>
+        <button class="btn btn-sm btn-outline-light" data-logout>Logout</button>
+      </div>
+      <div class="start-menu__columns">
+        <div>
+          <p class="column-title">Customer Journey</p>
+          <button class="start-tile" data-launch-modal="clientModal">
+            <i class="fas fa-address-card"></i>
+            <span>Client Maintenance</span>
+          </button>
+          <button class="start-tile" data-launch-modal="overdraftModal">
+            <i class="fas fa-hand-holding-dollar"></i>
+            <span>Overdraft Application</span>
+          </button>
+          <button class="start-tile" data-launch-modal="workflowModal">
+            <i class="fas fa-route"></i>
+            <span>Workflow Queue</span>
+          </button>
+        </div>
+        <div>
+          <p class="column-title">Operations Desk</p>
+          <button class="start-tile" data-launch-modal="reportsModal">
+            <i class="fas fa-clipboard-list"></i>
+            <span>Reports</span>
+          </button>
+          <button class="start-tile" data-launch-modal="systemModal">
+            <i class="fas fa-gear"></i>
+            <span>System BR.NET</span>
+          </button>
+          <button class="start-tile" data-launch-modal="loansModal">
+            <i class="fas fa-building-columns"></i>
+            <span>Loans Portfolio</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="start-overlay" data-start-overlay></div>
+  </footer>
+
+  <div class="modal fade legacy-modal" id="clientModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mb-0">Client Maintenance</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="legacy-panel">
+            <div class="legacy-panel__tabs">
+              <button class="tab-link active">Personal</button>
+              <button class="tab-link">Address</button>
+              <button class="tab-link">Employment</button>
+              <button class="tab-link">Special Offers</button>
+            </div>
+            <div class="legacy-panel__body">
+              <div class="row g-3">
+                <div class="col-md-3">
+                  <label class="form-label">Title</label>
+                  <select class="form-select">
+                    <option>Ms</option>
+                    <option>Mr</option>
+                    <option>Mrs</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">First Name</label>
+                  <input type="text" class="form-control" placeholder="Jane" />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Last Name</label>
+                  <input type="text" class="form-control" placeholder="Doe" />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Gender</label>
+                  <select class="form-select">
+                    <option>Female</option>
+                    <option>Male</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Identification Type</label>
+                  <select class="form-select">
+                    <option>ID</option>
+                    <option>Passport</option>
+                    <option>Alien</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Identification No</label>
+                  <input type="text" class="form-control" placeholder="A12345678" />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Date of Birth</label>
+                  <input type="date" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Blood Group</label>
+                  <select class="form-select">
+                    <option>B -ve</option>
+                    <option>O +ve</option>
+                    <option>A +ve</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Marital Status</label>
+                  <select class="form-select">
+                    <option>Single</option>
+                    <option>Married</option>
+                    <option>Divorced</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Number of Dependents</label>
+                  <input type="number" class="form-control" min="0" />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Relationship Manager</label>
+                  <select class="form-select">
+                    <option>Select...</option>
+                    <option>Mercy Nyawira</option>
+                    <option>Daniel Kiptoo</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Opened On</label>
+                  <input type="date" class="form-control" />
+                </div>
+              </div>
+              <hr />
+              <div class="row g-3">
+                <div class="col-md-3">
+                  <label class="form-label">Status</label>
+                  <input type="text" class="form-control" value="Open" disabled />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Created On</label>
+                  <input type="text" class="form-control" value="08/05/2025" disabled />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Modified On</label>
+                  <input type="text" class="form-control" value="--" disabled />
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label">Supervised By</label>
+                  <input type="text" class="form-control" placeholder="Assign" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade legacy-modal" id="overdraftModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Overdraft Application</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p class="text-muted">Prototype workspace for overdraft application with placeholder inputs.</p>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Account Number</label>
+              <input type="text" class="form-control" placeholder="001-2345678-90" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Requested Limit</label>
+              <input type="number" class="form-control" placeholder="250000" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Tenor (Months)</label>
+              <input type="number" class="form-control" placeholder="12" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Purpose</label>
+              <select class="form-select">
+                <option>Working Capital</option>
+                <option>Bridging</option>
+                <option>Seasonal</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Comments</label>
+              <textarea class="form-control" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary">Submit Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade legacy-modal" id="workflowModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Workflow Queue</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="table-responsive">
+            <table class="table table-sm align-middle">
+              <thead>
+                <tr>
+                  <th>Ref</th>
+                  <th>Client</th>
+                  <th>Step</th>
+                  <th>Priority</th>
+                  <th>Received</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>WF-1023</td>
+                  <td>Elimu Holdings</td>
+                  <td>Maker Checker</td>
+                  <td><span class="badge bg-danger">High</span></td>
+                  <td>34 mins ago</td>
+                </tr>
+                <tr>
+                  <td>WF-1022</td>
+                  <td>Hifadhi Sacco</td>
+                  <td>Limit Review</td>
+                  <td><span class="badge bg-warning text-dark">Medium</span></td>
+                  <td>1 hr ago</td>
+                </tr>
+                <tr>
+                  <td>WF-1018</td>
+                  <td>Retail Onboarding</td>
+                  <td>Docs Upload</td>
+                  <td><span class="badge bg-success">Low</span></td>
+                  <td>3 hrs ago</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary">Open Workflow Portal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade legacy-modal" id="reportsModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Reports Center</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Daily KYC Exceptions
+              <span class="badge bg-primary rounded-pill">Today</span>
+            </li>
+            <li class="list-group-item">Dormant Clients Reactivation</li>
+            <li class="list-group-item">Pending Maker Checker Items</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade legacy-modal" id="loansModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Loans Portfolio</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Shortcut into the loans origination queue from the customer management module.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade legacy-modal" id="systemModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">System BR.NET</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Launch admin level utilities and system setup panels.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/auth/auth.config.js"></script>
+  <script src="../../assets/js/auth/auth.service.js"></script>
+  <script src="../../assets/js/app.js"></script>
+</body>
+
+</html>

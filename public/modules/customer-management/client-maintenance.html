@@ -1,0 +1,1483 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Client Maintenance · Customer Management</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="../../assets/css/styles.css" />
+</head>
+
+<body class="client-maintenance copilot-theme" data-page="client-maintenance">
+  <div class="cm-react-orbs" aria-hidden="true">
+    <span class="cm-react-orb cm-react-orb--primary"></span>
+    <span class="cm-react-orb cm-react-orb--secondary"></span>
+    <span class="cm-react-orb cm-react-orb--accent"></span>
+  </div>
+  <div class="cm-workspace">
+    <form id="client-form" class="cm-shell-form" autocomplete="off" novalidate>
+      <aside class="cm-legacy-nav card-surface" aria-label="DataEntry menu">
+        <div class="cm-legacy-nav__header">
+          <button type="button" class="cm-dataentry-toggle"
+            onclick="this.closest('.cm-legacy-nav').querySelector('.cm-legacy-nav__list').classList.toggle('is-collapsed'); this.querySelector('.bi').classList.toggle('bi-chevron-down'); this.querySelector('.bi').classList.toggle('bi-chevron-right');">
+            <span style="display: flex; flex-direction: column; align-items: flex-start; flex: 1;">
+              <p class="cm-legacy-nav__eyebrow" style="margin: 0;">DataEntry</p>
+              <span style="font-size: 0.7rem; opacity: 0.7;">Click to expand</span>
+            </span>
+            <i class="bi bi-chevron-down"></i>
+          </button>
+          <h2>Client Shell</h2>
+          <p class="cm-legacy-nav__meta">Bank 032 · Head Office</p>
+        </div>
+        <div class="cm-legacy-nav__list is-collapsed">
+          <button type="button" class="cm-legacy-nav__item" data-dataentry-link="view">
+            <span>View</span>
+          </button>
+          <button type="button" class="cm-legacy-nav__item" data-dataentry-link="address">
+            <span>Address</span>
+          </button>
+          <button type="button" class="cm-legacy-nav__item" data-dataentry-link="introducer">
+            <span>Introducer Details</span>
+          </button>
+          <button type="button" class="cm-legacy-nav__item" data-dataentry-link="bank-accounts">
+            <span>Bank Accounts</span>
+          </button>
+          <button type="button" class="cm-legacy-nav__item" data-dataentry-link="relation">
+            <span>Relation</span>
+          </button>
+          <button type="button" class="cm-legacy-nav__item" data-dataentry-link="client-profile">
+            <span>Client Profile Change</span>
+          </button>
+          <button type="button" class="cm-legacy-nav__item" data-dataentry-link="demise">
+            <span>Demise Details</span>
+          </button>
+          <button type="button" class="cm-legacy-nav__item" data-dataentry-link="udf1">
+            <span>User Defined Fields 1</span>
+          </button>
+          <button type="button" class="cm-legacy-nav__item" data-dataentry-link="udf2">
+            <span>User Defined Fields 2</span>
+          </button>
+          <button type="button" class="cm-legacy-nav__item" data-dataentry-link="udf3">
+            <span>User Defined Fields 3</span>
+          </button>
+          <button type="button" class="cm-legacy-nav__item" data-dataentry-link="identity">
+            <span>Client Identity Types</span>
+          </button>
+        </div>
+      </aside>
+
+      <section class="cm-legacy-content">
+        <section class="cm-top-identifiers card-surface">
+          <div class="cm-top-identifiers__grid">
+            <div class="cbs-field">
+              <label class="cbs-label required" for="ClientID">Client ID</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="ClientID" name="ClientID" placeholder="e.g. CSK00092"
+                  required />
+                <button class="btn btn-outline-primary" type="button" data-client-search aria-label="Search client">
+                  <i class="bi bi-search"></i>
+                </button>
+              </div>
+            </div>
+            <div class="cbs-field">
+              <label class="cbs-label required" for="memberType">Client Type</label>
+              <select id="memberType" name="ClientTypeID" class="form-select" data-lookup="clientTypes"
+                data-placeholder="Select type" required></select>
+            </div>
+            <div class="cbs-field" data-client-scope="individual">
+              <label class="cbs-label" for="ApplicationID">Application ID</label>
+              <input type="text" class="form-control" id="ApplicationID" name="ApplicationID"
+                placeholder="--Select--" />
+            </div>
+            <div class="cbs-field" data-client-scope="individual">
+              <label class="cbs-label" for="BaseID">Base ID</label>
+              <div class="input-group">
+                <select class="form-select" id="BaseID" name="BaseID">
+                  <option value="">--Select--</option>
+                </select>
+                <button class="btn btn-outline-secondary" type="button" aria-label="Add base ID"><i
+                    class="bi bi-plus"></i></button>
+              </div>
+            </div>
+            <div class="cbs-field cm-top-identifiers__full">
+              <label class="cbs-label" for="ClientName">Client Name</label>
+              <input type="text" class="form-control" id="ClientName" name="ClientName" data-client-name-field readonly
+                placeholder="Auto derived" />
+            </div>
+          </div>
+        </section>
+
+        <div class="cm-scroll-region">
+
+          <section class="cm-stepper card-surface" data-stepper>
+            <div class="cm-stepper__nav" data-stepper-nav>
+              <button type="button" class="cm-stepper__trigger is-active" data-step-id="personal" data-step-index="1"
+                data-step-default data-step-scope="individual,group,minor,employee"
+                data-client-scope="individual,group,minor,employee"
+                data-step-order="individual:1;group:1;minor:1;employee:1">
+                <span class="cm-stepper__index" aria-hidden="true">1</span>
+                <div class="cm-stepper__text">
+                  <span class="cm-stepper__label">Personal</span>
+                  <span class="cm-stepper__pill">Individual</span>
+                </div>
+              </button>
+              <button type="button" class="cm-stepper__trigger" data-step-id="corporate" data-step-index="2"
+                data-step-scope="corporate,bank" data-client-scope="corporate,bank"
+                data-step-order="corporate:1;bank:1">
+                <span class="cm-stepper__index" aria-hidden="true">2</span>
+                <div class="cm-stepper__text">
+                  <span class="cm-stepper__label">Corporate</span>
+                  <span class="cm-stepper__pill">Corporate Bank</span>
+                </div>
+              </button>
+              <button type="button" class="cm-stepper__trigger" data-step-id="directors" data-step-index="3"
+                data-step-scope="corporate,bank" data-client-scope="corporate,bank"
+                data-step-order="corporate:4;bank:4">
+                <span class="cm-stepper__index" aria-hidden="true">3</span>
+                <div class="cm-stepper__text">
+                  <span class="cm-stepper__label">Directors</span>
+                  <span class="cm-stepper__pill">Corporate</span>
+                </div>
+              </button>
+              <button type="button" class="cm-stepper__trigger" data-step-id="address" data-step-index="4"
+                data-client-scope="all" data-step-order="individual:2;group:2;minor:2;employee:2;corporate:2;bank:2">
+                <span class="cm-stepper__index" aria-hidden="true">4</span>
+                <div class="cm-stepper__text">
+                  <span class="cm-stepper__label">Address</span>
+                  <span class="cm-stepper__pill">All Clients</span>
+                </div>
+              </button>
+              <button type="button" class="cm-stepper__trigger" data-step-id="kin" data-step-index="5"
+                data-step-scope="individual,minor" data-client-scope="individual,minor"
+                data-step-order="individual:5;minor:5">
+                <span class="cm-stepper__index" aria-hidden="true">5</span>
+                <div class="cm-stepper__text">
+                  <span class="cm-stepper__label">Next of Kin</span>
+                  <span class="cm-stepper__pill">Individual Minor</span>
+                </div>
+              </button>
+              <button type="button" class="cm-stepper__trigger" data-step-id="employment" data-step-index="6"
+                data-step-scope="individual,employee,group" data-client-scope="individual,employee,group"
+                data-step-order="individual:3;employee:3;group:3">
+                <span class="cm-stepper__index" aria-hidden="true">6</span>
+                <div class="cm-stepper__text">
+                  <span class="cm-stepper__label">Employment</span>
+                  <span class="cm-stepper__pill">Individual</span>
+                </div>
+              </button>
+              <button type="button" class="cm-stepper__trigger" data-step-id="offers" data-step-index="7"
+                data-client-scope="all" data-step-order="individual:4;group:4;corporate:3;bank:3">
+                <span class="cm-stepper__index" aria-hidden="true">7</span>
+                <div class="cm-stepper__text">
+                  <span class="cm-stepper__label">Special Offers</span>
+                  <span class="cm-stepper__pill">All Clients</span>
+                </div>
+              </button>
+              <button type="button" class="cm-stepper__trigger" data-step-id="groupDetail" data-step-index="10"
+                data-step-scope="group" data-client-scope="group" data-step-order="group:5">
+                <span class="cm-stepper__index" aria-hidden="true">G</span>
+                <div class="cm-stepper__text">
+                  <span class="cm-stepper__label">Group Detail</span>
+                  <span class="cm-stepper__pill">Group</span>
+                </div>
+              </button>
+              <button type="button" class="cm-stepper__trigger" data-step-id="kyc" data-step-index="8"
+                data-client-scope="all" data-step-order="all:5">
+                <span class="cm-stepper__index" aria-hidden="true">8</span>
+                <div class="cm-stepper__text">
+                  <span class="cm-stepper__label">Other Details</span>
+                  <span class="cm-stepper__pill">All Clients</span>
+                </div>
+              </button>
+              <button type="button" class="cm-stepper__trigger" data-step-id="products" data-step-index="9"
+                data-client-scope="all" data-step-order="all:6">
+                <span class="cm-stepper__index" aria-hidden="true">9</span>
+                <div class="cm-stepper__text">
+                  <span class="cm-stepper__label">Products &amp; Services</span>
+                  <span class="cm-stepper__pill">All Clients</span>
+                </div>
+              </button>
+              <button type="button" class="cm-stepper__trigger" data-step-id="documents" data-step-index="10"
+                data-client-scope="all" data-step-order="all:7">
+                <span class="cm-stepper__index" aria-hidden="true">10</span>
+                <div class="cm-stepper__text">
+                  <span class="cm-stepper__label">Documents</span>
+                  <span class="cm-stepper__pill">All Clients</span>
+                </div>
+              </button>
+              <button type="button" class="cm-stepper__trigger" data-step-id="submit" data-step-index="11"
+                data-client-scope="all" data-step-order="all:8">
+                <span class="cm-stepper__index" aria-hidden="true">11</span>
+                <div class="cm-stepper__text">
+                  <span class="cm-stepper__label">Submit</span>
+                  <span class="cm-stepper__pill">All Clients</span>
+                </div>
+              </button>
+            </div>
+
+            <div class="cm-stepper__panels">
+              <article class="cm-stepper__panel is-active" data-step-panel="personal" data-step-scope="individual"
+                data-client-scope="individual">
+                <div class="cm-personal-grid">
+                  <div class="cm-personal-column">
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="title">Title</label>
+                      <select id="title" name="TitleID" class="form-select" data-lookup="titles"
+                        data-placeholder="Select title" required></select>
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="firstName">First Name</label>
+                      <input type="text" id="firstName" name="FirstName" class="form-control" required />
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label" for="middleName">Middle Name</label>
+                      <input type="text" id="middleName" name="MiddleName" class="form-control" />
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="lastName">Last Name</label>
+                      <input type="text" id="lastName" name="LastName" class="form-control" required />
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="dob">Date of Birth</label>
+                      <input type="date" id="dob" name="DateOfBirth" class="form-control" required />
+                    </div>
+                  </div>
+
+                  <div class="cm-personal-column">
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="gender">Gender</label>
+                      <select id="gender" name="GenderID" class="form-select" data-lookup="genders"
+                        data-placeholder="Select gender" required></select>
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="residentStatus">Resident</label>
+                      <select id="residentStatus" name="ResidentID" class="form-select" data-lookup="residentStatuses"
+                        required></select>
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label" for="nationality">Nationality</label>
+                      <select id="nationality" name="NationalityID" class="form-select" data-lookup="countries">
+                        <option value="">--Select--</option>
+                      </select>
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label" for="age">Age</label>
+                      <input type="text" id="age" name="Age" class="form-control" placeholder="Auto" readonly />
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label" for="ageAsOn">Age As On</label>
+                      <input type="text" id="ageAsOn" name="AgeAsOn" class="form-control" placeholder="Derived"
+                        readonly />
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label" for="issuedBy">Issued By</label>
+                      <input type="text" id="issuedBy" name="IssuedBy" class="form-control" />
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label" for="literacyLevel">Literacy Level</label>
+                      <select id="literacyLevel" name="LiteracyLevel" class="form-select" data-lookup="literacyLevels"
+                        data-placeholder="--Select--"></select>
+                    </div>
+                  </div>
+
+                  <div class="cm-personal-column">
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="idType">Identification Type</label>
+                      <select id="idType" name="IdentificationTypeID" class="form-select"
+                        data-lookup="identificationTypes" required></select>
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="idNumber">Identification No</label>
+                      <div class="input-group">
+                        <input type="text" id="idNumber" name="NationalId" class="form-control" required />
+                        <button class="btn btn-outline-secondary" type="button" data-id-lookup>
+                          <i class="bi bi-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label" for="issueDate">Identification Issue Date</label>
+                      <input type="date" id="issueDate" name="IDIssueDate" class="form-control" />
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label" for="expiryDate">Identification Expiry Date</label>
+                      <input type="date" id="expiryDate" name="IDExpiryDate" class="form-control" />
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label" for="maritalStatus">Marital Status</label>
+                      <select id="maritalStatus" name="MaritalStatus" class="form-select" data-lookup="maritalStatuses"
+                        data-placeholder="--Select--"></select>
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label" for="children">Number Of Children</label>
+                      <input type="number" id="children" name="NumberOfChildren" class="form-control" />
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label" for="dependents">Number Of Dependents</label>
+                      <input type="number" id="dependents" name="NumberOfDependents" class="form-control" />
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label" for="motherName">Mother Name</label>
+                      <input type="text" id="motherName" name="MotherName" class="form-control" />
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label" for="bloodGroup">Blood Group</label>
+                      <select id="bloodGroup" name="BloodGroup" class="form-select" data-lookup="bloodGroups"
+                        data-placeholder="--Select--"></select>
+                    </div>
+                  </div>
+
+                  <div class="cm-personal-column">
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="relationshipManager">Relationship Manager</label>
+                      <select id="relationshipManager" name="RelationshipManager" class="form-select"
+                        data-lookup="relationshipManagers" required></select>
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="houseMembers">Number Of House Members</label>
+                      <input type="number" id="houseMembers" name="NumberOfHouseMembers" class="form-control"
+                        required />
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="openedBy">Opened By</label>
+                      <div class="input-group">
+                        <input type="text" id="openedBy" name="OpenedBy" class="form-control" required readonly />
+                        <button class="btn btn-outline-secondary" type="button"><i class="bi bi-search"></i></button>
+                      </div>
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="openedDate">Opened On</label>
+                      <input type="date" id="openedDate" name="OpenedDate" class="form-control" required />
+                    </div>
+                    <div class="cbs-field cm-compact-field cbs-inline">
+                      <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" id="canDonateBlood" name="CanDonateBlood" />
+                        <label class="form-check-label" for="canDonateBlood">Can donate blood</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cm-stepper__actions">
+                  <button type="button" class="btn btn-outline-secondary" data-stepper-action="next">Next</button>
+                </div>
+              </article>
+
+              <article class="cm-stepper__panel" data-step-panel="corporate" data-step-scope="corporate,bank"
+                data-client-scope="corporate,bank">
+                <div class="cbs-grid cbs-grid--four cbs-grid--tight">
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label required" for="corpCompanyName">Company Name</label>
+                    <input type="text" id="corpCompanyName" name="CompanyName" class="form-control" data-corporate-field
+                      required />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="corpTradingName">Trading Name</label>
+                    <input type="text" id="corpTradingName" name="TradingName" class="form-control"
+                      data-corporate-field />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label required" for="registrationNumber">Registration Number</label>
+                    <input type="text" id="registrationNumber" name="RegistrationNumber" class="form-control"
+                      data-corporate-field required />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label required" for="dateOfRegistration">Date of Registration</label>
+                    <input type="date" id="dateOfRegistration" name="DateOfRegistration" class="form-control"
+                      data-corporate-field required />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="taxId">Tax Identification No</label>
+                    <input type="text" id="taxId" name="TaxId" class="form-control" data-corporate-field />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label required" for="licenseNo">License No</label>
+                    <input type="text" id="licenseNo" name="LicenseNo" class="form-control" data-corporate-field />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="constitution">Constitution</label>
+                    <input type="text" id="constitution" name="Constitution" class="form-control"
+                      data-corporate-field />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="registeredAt">Registered At</label>
+                    <input type="text" id="registeredAt" name="RegisteredAt" class="form-control"
+                      data-corporate-field />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label required" for="registeredOffice">Registered Office</label>
+                    <input type="text" id="registeredOffice" name="RegisteredOffice" class="form-control"
+                      data-corporate-field required />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="incorporationCountry">Incorporation Country</label>
+                    <select id="incorporationCountry" name="IncorporationCountryID" class="form-select"
+                      data-lookup="countries" data-corporate-field>
+                      <option value="">--Select--</option>
+                    </select>
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="industry">Industry</label>
+                    <select id="industry" name="IndustryID" class="form-select" data-lookup="industries"
+                      data-corporate-field>
+                      <option value="">--Select--</option>
+                    </select>
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="turnover">Annual Turnover</label>
+                    <input type="number" id="turnover" name="AnnualTurnover" class="form-control"
+                      data-corporate-field />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="employees">Number of Employees</label>
+                    <input type="number" id="employees" name="NumberOfEmployees" class="form-control"
+                      data-corporate-field />
+                  </div>
+                  <div class="cbs-field cm-compact-field cbs-full">
+                    <label class="cbs-label" for="natureOfBusiness">Nature Of Business</label>
+                    <textarea id="natureOfBusiness" name="NatureOfBusiness" class="form-control" rows="2"
+                      data-corporate-field></textarea>
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="corpContact">Corporate Contact</label>
+                    <input type="text" id="corpContact" name="CorporateContactPerson" class="form-control" />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="corpPhone">Contact Phone</label>
+                    <input type="tel" id="corpPhone" name="CorporatePhone" class="form-control" />
+                  </div>
+                  <div class="cbs-field cm-compact-field cbs-full">
+                    <label class="cbs-label" for="corpComments">Comments</label>
+                    <textarea id="corpComments" name="Comments" class="form-control" rows="2"
+                      data-corporate-field></textarea>
+                  </div>
+                </div>
+
+                <div class="cm-stepper__actions">
+                  <button type="button" class="btn btn-outline-secondary" data-stepper-action="prev">Back</button>
+                  <button type="button" class="btn btn-primary" data-stepper-action="next">Next</button>
+                </div>
+              </article>
+              <article class="cm-stepper__panel" data-step-panel="directors" data-step-scope="corporate,bank"
+                data-client-scope="corporate,bank">
+                <div class="cm-panel-card" data-collection="directors">
+                  <div class="cbs-grid cbs-grid--four cbs-grid--tight">
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="directorName">Director Name</label>
+                      <input type="text" id="directorName" class="form-control" data-director-field="clientName" />
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="directorRelation">Relation</label>
+                      <input type="text" id="directorRelation" class="form-control" data-director-field="relation" />
+                    </div>
+                    <div class="cbs-field cm-compact-field">
+                      <label class="cbs-label required" for="directorShare">Share %</label>
+                      <input type="number" min="0" max="100" step="0.01" id="directorShare" class="form-control"
+                        data-director-field="share" />
+                    </div>
+                  </div>
+                  <div class="cm-inline-actions">
+                    <button type="button" class="btn btn-primary" data-director-action="save">Add / Update</button>
+                    <button type="button" class="btn btn-outline-secondary"
+                      data-director-action="cancel">Cancel</button>
+                  </div>
+                </div>
+                <div class="table-responsive mt-3">
+                  <table class="table table-sm cm-table" data-table="directors">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Director</th>
+                        <th>Relation</th>
+                        <th>Share %</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+                <div class="cm-stepper__actions">
+                  <button type="button" class="btn btn-outline-secondary" data-stepper-action="prev">Back</button>
+                  <button type="button" class="btn btn-primary" data-stepper-action="next">Next</button>
+                </div>
+              </article>
+
+              <article class="cm-stepper__panel" data-step-panel="address" data-client-scope="all">
+                <div data-collection="addresses">
+                  <div data-collection-items class="cm-collection__items"></div>
+                </div>
+                <div class="cm-stepper__actions">
+                  <button type="button" class="btn btn-outline-secondary" data-stepper-action="prev">Back</button>
+                  <button type="button" class="btn btn-primary" data-stepper-action="next">Next</button>
+                </div>
+              </article>
+
+              <article class="cm-stepper__panel" data-step-panel="kin" data-step-scope="individual,minor"
+                data-client-scope="individual,minor">
+                <div class="cm-panel-card" data-kin-summary>
+                  <div class="cbs-grid cbs-grid--three cbs-grid--tight">
+                    <div class="cbs-field">
+                      <label class="cbs-label">Records</label>
+                      <div class="cbs-value" data-kin-total="records">0</div>
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label">Allocated %</label>
+                      <div class="cbs-value" data-kin-total="allocated">0%</div>
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label">Remaining %</label>
+                      <div class="cbs-value" data-kin-total="remaining">100%</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cm-panel-card" data-kin-form>
+                  <div class="cbs-grid cbs-grid--four cbs-grid--tight">
+                    <div class="cbs-field">
+                      <label class="cbs-label" for="kinTitle">Title</label>
+                      <select id="kinTitle" class="form-select" data-lookup="titles"></select>
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label required" for="kinFirstName">First Name</label>
+                      <input type="text" id="kinFirstName" class="form-control" />
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label required" for="kinLastName">Last Name</label>
+                      <input type="text" id="kinLastName" class="form-control" />
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label required" for="kinRelation">Relation</label>
+                      <select id="kinRelation" class="form-select" data-kin-field="RelationID" data-lookup="relations"
+                        data-placeholder="--Select--" required></select>
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label required" for="kinRef">Reference #</label>
+                      <input type="number" min="1" id="kinRef" class="form-control" data-kin-field="RelationRefNo"
+                        required />
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label required" for="kinShare">Share %</label>
+                      <input type="number" min="0" max="100" step="0.01" id="kinShare" class="form-control"
+                        data-kin-field="SharePercent" required />
+                    </div>
+                    <div class="cbs-field cbs-full">
+                      <label class="cbs-label required" for="kinRemarks">Remarks</label>
+                      <input type="text" id="kinRemarks" class="form-control" data-kin-field="Remarks" required />
+                    </div>
+                  </div>
+                  <div class="cm-inline-actions">
+                    <button type="button" class="btn btn-primary" data-kin-action="save">Add / Update</button>
+                    <button type="button" class="btn btn-outline-secondary" data-kin-action="cancel">Cancel</button>
+                  </div>
+                </div>
+
+                <div class="table-responsive mt-3">
+                  <table class="table table-sm cm-table" data-table="kin">
+                    <thead>
+                      <tr>
+                        <th>Title</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Relation</th>
+                        <th>Share %</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+
+                <div class="cm-stepper__actions">
+                  <button type="button" class="btn btn-outline-secondary" data-stepper-action="prev">Back</button>
+                  <button type="button" class="btn btn-primary" data-stepper-action="next">Next</button>
+                </div>
+              </article>
+
+              <article class="cm-stepper__panel" data-step-panel="employment"
+                data-step-scope="individual,employee,group" data-client-scope="individual,employee,group">
+                <div class="cm-panel-card mb-3">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                      <h4 class="mb-0">Employment Details</h4>
+                      <small class="text-muted">* All figures are monthly based</small>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="cbs-label mb-0">Income Type</span>
+                      <div class="form-check form-check-inline mb-0">
+                        <input class="form-check-input" type="radio" name="IsSalaried" id="incomeSalaried"
+                          value="true" />
+                        <label class="form-check-label" for="incomeSalaried">Salaried</label>
+                      </div>
+                      <div class="form-check form-check-inline mb-0">
+                        <input class="form-check-input" type="radio" name="IsSalaried" id="incomeSelf" value="false" />
+                        <label class="form-check-label" for="incomeSelf">Self Employed</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cbs-grid cbs-grid--four cbs-grid--tight">
+                    <div class="cbs-field">
+                      <label class="cbs-label required" for="Occupation">Occupation</label>
+                      <select id="Occupation" name="Occupation" class="form-select" data-lookup="occupations"
+                        data-placeholder="--Select--" data-legacy-id="Occupation" required></select>
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label required" for="Designation">Position</label>
+                      <select id="Designation" name="Designation" class="form-select" data-lookup="designations"
+                        data-placeholder="--Select--" data-legacy-id="Designation" required></select>
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label required" for="CompanyType">Company Type</label>
+                      <select id="CompanyType" name="CompanyType" class="form-select" data-lookup="companyTypes"
+                        data-placeholder="--Select--" data-legacy-id="CompanyType" required></select>
+                    </div>
+                  </div>
+
+                  <div class="cbs-grid cbs-grid--four cbs-grid--tight mt-3">
+                    <div class="cbs-field" data-employment-for="salaried">
+                      <label class="cbs-label" for="EmploymentCompanyName">Company Name</label>
+                      <input type="text" id="EmploymentCompanyName" name="EmploymentCompanyName" class="form-control" />
+                    </div>
+                    <div class="cbs-field" data-employment-for="salaried">
+                      <label class="cbs-label" for="EmploymentCompanyCode">Company Code</label>
+                      <input type="text" id="EmploymentCompanyCode" name="EmploymentCompanyCode" class="form-control" />
+                    </div>
+                    <div class="cbs-field" data-employment-for="salaried">
+                      <label class="cbs-label" for="WorkPermitNo">Work Permit No</label>
+                      <input type="text" id="WorkPermitNo" name="WorkPermitNo" class="form-control" />
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label" for="WorkingSince">Working Since</label>
+                      <input type="date" id="WorkingSince" name="WorkingSince" class="form-control" />
+                    </div>
+                  </div>
+
+                  <div class="cbs-grid cbs-grid--four cbs-grid--tight mt-3">
+                    <div class="cbs-field">
+                      <label class="cbs-label required" for="MonthlyIncome">Average Monthly Income</label>
+                      <input type="number" id="MonthlyIncome" name="MonthlyIncome" class="form-control"
+                        data-legacy-id="MonthlyIncome" min="0" step="0.01" />
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label" for="OtherIncome">Other Income</label>
+                      <input type="number" id="OtherIncome" name="OtherIncome" class="form-control" min="0"
+                        step="0.01" />
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label required" for="AverageAnnualIncome">Average Annual Income</label>
+                      <input type="number" id="AverageAnnualIncome" name="AverageAnnualIncome" class="form-control"
+                        min="0" step="0.01" readonly />
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label" for="TotalIncome">Total Income</label>
+                      <input type="number" id="TotalIncome" name="TotalIncome" class="form-control" min="0" step="0.01"
+                        readonly />
+                    </div>
+                  </div>
+
+                  <div class="cbs-grid cbs-grid--four cbs-grid--tight mt-3">
+                    <div class="cbs-field" data-employment-for="salaried">
+                      <label class="cbs-label" for="RentExpenses">Rent Expenses</label>
+                      <input type="number" id="RentExpenses" name="RentExpenses" class="form-control" min="0"
+                        step="0.01" />
+                    </div>
+                    <div class="cbs-field" data-employment-for="salaried">
+                      <label class="cbs-label" for="OtherExpenses">Other Expenses</label>
+                      <input type="number" id="OtherExpenses" name="OtherExpenses" class="form-control" min="0"
+                        step="0.01" />
+                    </div>
+                    <div class="cbs-field" data-employment-for="salaried">
+                      <label class="cbs-label" for="TotalExpenses">Total Expenses</label>
+                      <input type="number" id="TotalExpenses" name="TotalExpenses" class="form-control" min="0"
+                        step="0.01" readonly />
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label" for="NetSavings">Net Savings</label>
+                      <input type="number" id="NetSavings" name="NetSavings" class="form-control" min="0" step="0.01"
+                        readonly />
+                    </div>
+                  </div>
+
+                  <div class="cbs-grid cbs-grid--four cbs-grid--tight mt-3">
+                    <div class="cbs-field" data-employment-for="self-employed">
+                      <label class="cbs-label required" for="BusinessOwnership">Business Ownership</label>
+                      <select id="BusinessOwnership" name="BusinessOwnership" class="form-select"
+                        data-lookup="businessOwnerships" data-placeholder="--Select--"></select>
+                    </div>
+                    <div class="cbs-field" data-employment-for="self-employed">
+                      <label class="cbs-label required" for="BusinessStartedYear">Business Started Year</label>
+                      <input type="number" id="BusinessStartedYear" name="BusinessStartedYear" class="form-control"
+                        min="1900" max="9999" />
+                    </div>
+                    <div class="cbs-field" data-employment-for="self-employed">
+                      <label class="cbs-label required" for="BusinessLine">Business Line</label>
+                      <select id="BusinessLine" name="BusinessLine" class="form-select" data-lookup="businessLines"
+                        data-placeholder="--Select--"></select>
+                    </div>
+                    <div class="cbs-field" data-employment-for="self-employed">
+                      <label class="cbs-label required" for="NumberOfEmployees">No Of Employees / Members</label>
+                      <input type="number" id="NumberOfEmployees" name="NumberOfEmployees" class="form-control"
+                        min="0" />
+                    </div>
+                    <div class="cbs-field cbs-full" data-employment-for="self-employed">
+                      <label class="cbs-label" for="EmploymentComments">Comments</label>
+                      <textarea id="EmploymentComments" name="EmploymentComments" class="form-control"
+                        rows="2"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="cm-stepper__actions">
+                  <button type="button" class="btn btn-outline-secondary" data-stepper-action="prev">Back</button>
+                  <button type="button" class="btn btn-primary" data-stepper-action="next">Next</button>
+                </div>
+              </article>
+
+              <article class="cm-stepper__panel" data-step-panel="offers" data-client-scope="all">
+                <div class="cm-panel-card">
+                  <div class="cbs-grid cbs-grid--two cbs-grid--tight">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="CanSendGreetings" name="CanSendGreetings" />
+                      <label class="form-check-label" for="CanSendGreetings">Can Send Greetings</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="CanSendAssociateSpecialOffer"
+                        name="CanSendAssociateSpecialOffer" />
+                      <label class="form-check-label" for="CanSendAssociateSpecialOffer">Can Send Associate Special
+                        Offer</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="CanSendOurSpecialOffers"
+                        name="CanSendOurSpecialOffers" />
+                      <label class="form-check-label" for="CanSendOurSpecialOffers">Can Send Our Special Offers</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="eStatementRequired"
+                        name="eStatementRequired" />
+                      <label class="form-check-label" for="eStatementRequired">Statement Online</label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" id="MobileAlertRequired"
+                        name="MobileAlertRequired" />
+                      <label class="form-check-label" for="MobileAlertRequired">Mobile Alert</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="cm-stepper__actions">
+                  <button type="button" class="btn btn-outline-secondary" data-stepper-action="prev">Back</button>
+                  <button type="button" class="btn btn-primary" data-stepper-action="next">Next</button>
+                </div>
+              </article>
+
+              <article class="cm-stepper__panel" data-step-panel="kyc" data-client-scope="all">
+                <div class="cm-panel-card">
+                  <h4 class="mb-3">KYC &amp; Regulatory Declarations</h4>
+                  <div class="cbs-grid cbs-grid--three cbs-grid--tight mb-3">
+                    <div class="cbs-field">
+                      <label class="cbs-label required" for="kraPin">KRA PIN</label>
+                      <input type="text" id="kraPin" name="KRAPin" class="form-control" />
+                    </div>
+                  </div>
+                  <div class="cbs-grid cbs-grid--three cbs-grid--tight">
+                    <div class="cbs-field">
+                      <label class="cbs-label required">PEP Status</label>
+                      <div class="btn-group" role="group">
+                        <input type="radio" class="btn-check" name="IsPEP" id="pepYes" value="Y"
+                          data-legacy-id="IsPEP" />
+                        <label class="btn btn-outline-primary" for="pepYes">Yes</label>
+                        <input type="radio" class="btn-check" name="IsPEP" id="pepNo" value="N"
+                          data-legacy-id="IsPEP" />
+                        <label class="btn btn-outline-primary" for="pepNo">No</label>
+                      </div>
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label required">US Person</label>
+                      <div class="btn-group" role="group">
+                        <input type="radio" class="btn-check" name="IsUSPerson" id="usPersonYes" value="Y"
+                          data-legacy-id="IsUSPerson" />
+                        <label class="btn btn-outline-primary" for="usPersonYes">Yes</label>
+                        <input type="radio" class="btn-check" name="IsUSPerson" id="usPersonNo" value="N"
+                          data-legacy-id="IsUSPerson" />
+                        <label class="btn btn-outline-primary" for="usPersonNo">No</label>
+                      </div>
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label required">Data Cleansed</label>
+                      <div class="btn-group" role="group">
+                        <input type="radio" class="btn-check" name="IsDataCleansed" id="dataCleansedYes" value="Y"
+                          data-legacy-id="IsDataCleansed" />
+                        <label class="btn btn-outline-primary" for="dataCleansedYes">Yes</label>
+                        <input type="radio" class="btn-check" name="IsDataCleansed" id="dataCleansedNo" value="N"
+                          data-legacy-id="IsDataCleansed" />
+                        <label class="btn btn-outline-primary" for="dataCleansedNo">No</label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="cbs-grid cbs-grid--three cbs-grid--tight mt-3">
+                    <div class="cbs-field" data-kyc-section="pep-details">
+                      <label class="cbs-label" for="pepOrg">PEP Organization</label>
+                      <input type="text" id="pepOrg" name="PEPOrganization" class="form-control"
+                        data-legacy-id="PEPOrganization" />
+                    </div>
+                    <div class="cbs-field" data-kyc-section="pep-details">
+                      <label class="cbs-label" for="pepPosition">PEP Position</label>
+                      <input type="text" id="pepPosition" name="PEPPosition" class="form-control"
+                        data-legacy-id="PEPPosition" />
+                    </div>
+                    <div class="cbs-field">
+                      <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" id="ceoInfo" name="chkceoinfos"
+                          data-legacy-id="chkceoinfos" />
+                        <label class="form-check-label" for="ceoInfo">Capture extended PEP / CEO info</label>
+                      </div>
+                    </div>
+                    <div class="cbs-field" data-kyc-section="pep-extended">
+                      <label class="cbs-label" for="pepSpouse">PEP Spouse Name</label>
+                      <input type="text" id="pepSpouse" name="PEPSpouseName" class="form-control"
+                        data-legacy-id="PEPSpouseName" />
+                    </div>
+                    <div class="cbs-field" data-kyc-section="pep-extended">
+                      <label class="cbs-label" for="pepChild">PEP Child Name</label>
+                      <input type="text" id="pepChild" name="PEPChildName" class="form-control"
+                        data-legacy-id="PEPChildName" />
+                    </div>
+                  </div>
+
+                  <div class="cbs-grid cbs-grid--three cbs-grid--tight mt-3" data-kyc-section="us-details">
+                    <div class="cbs-field">
+                      <label class="cbs-label" for="ssn">SSN</label>
+                      <input type="text" id="ssn" name="SSN" class="form-control" data-legacy-id="SSN" />
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label" for="eid">EID</label>
+                      <input type="text" id="eid" name="EID" class="form-control" data-legacy-id="EID" />
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label" for="ustin">US TIN</label>
+                      <input type="text" id="ustin" name="USTIN" class="form-control" data-legacy-id="USTIN" />
+                    </div>
+                  </div>
+
+                  <hr class="my-3" />
+                  <h5 class="mb-2">Other Details</h5>
+                  <div class="cbs-grid cbs-grid--three cbs-grid--tight">
+                    <div class="cbs-field">
+                      <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" id="blackList" name="BlackList" />
+                        <label class="form-check-label" for="blackList">Black List</label>
+                      </div>
+                    </div>
+                    <div class="cbs-field">
+                      <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" id="underLawSuit" name="UnderLawSuit" />
+                        <label class="form-check-label" for="underLawSuit">Under Law Suit</label>
+                      </div>
+                    </div>
+                    <div class="cbs-field">
+                      <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" id="closeLawSuit" name="CloseLawSuit" />
+                        <label class="form-check-label" for="closeLawSuit">Close Law Suit</label>
+                      </div>
+                    </div>
+                    <div class="cbs-field">
+                      <div class="form-check mt-4">
+                        <input class="form-check-input" type="checkbox" id="cnfso" name="CNFSO" />
+                        <label class="form-check-label" for="cnfso">CNFSO</label>
+                      </div>
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label" for="clientArea">Client Area</label>
+                      <input type="text" id="clientArea" name="ClientArea" class="form-control" />
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label" for="personalStatus">Personal Status</label>
+                      <input type="text" id="personalStatus" name="PersonalStatus" class="form-control" />
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label" for="nbeImportAccount">NBE Import Account ID</label>
+                      <input type="text" id="nbeImportAccount" name="NBEImportAccountID" class="form-control" />
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label" for="nbeExportAccount">NBE Export Account ID</label>
+                      <input type="text" id="nbeExportAccount" name="NBEExportAccountID" class="form-control" />
+                    </div>
+                    <div class="cbs-field">
+                      <label class="cbs-label" for="tradeLicenseNo">Trade License No</label>
+                      <input type="text" id="tradeLicenseNo" name="TradeLicenseNo" class="form-control" />
+                    </div>
+                  </div>
+                </div>
+                <div class="cm-stepper__actions">
+                  <button type="button" class="btn btn-outline-secondary" data-stepper-action="prev">Back</button>
+                  <button type="button" class="btn btn-primary" data-stepper-action="next">Next</button>
+                </div>
+              </article>
+
+              <article class="cm-stepper__panel" data-step-panel="groupDetail" data-step-scope="group"
+                data-client-scope="group">
+                <div class="cbs-grid cbs-grid--four cbs-grid--tight">
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label required" for="groupName">Group Name</label>
+                    <input type="text" id="groupName" name="GroupName" class="form-control" />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="centerId">Center ID</label>
+                    <input type="text" id="centerId" name="CenterID" class="form-control" />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="groupId">Group ID</label>
+                    <input type="text" id="groupId" name="GroupID" class="form-control" />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="groupType">Group Type</label>
+                    <select id="groupType" name="GroupType" class="form-select">
+                      <option value="">--Select--</option>
+                      <option value="INV">Investment</option>
+                      <option value="SAV">Savings</option>
+                      <option value="CHAMA">Chama</option>
+                    </select>
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="meetingDay">Meeting Day</label>
+                    <select id="meetingDay" name="MeetingDay" class="form-select">
+                      <option value="">--Select--</option>
+                      <option value="Mon">Monday</option>
+                      <option value="Tue">Tuesday</option>
+                      <option value="Wed">Wednesday</option>
+                      <option value="Thu">Thursday</option>
+                      <option value="Fri">Friday</option>
+                      <option value="Sat">Saturday</option>
+                      <option value="Sun">Sunday</option>
+                    </select>
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="meetingVenue">Meeting Venue</label>
+                    <input type="text" id="meetingVenue" name="MeetingVenue" class="form-control" />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="joinOn">Join On</label>
+                    <input type="date" id="joinOn" name="JoinOn" class="form-control" />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="contributionCycle">Contribution Cycle</label>
+                    <select id="contributionCycle" name="ContributionCycle" class="form-select">
+                      <option value="">--Select--</option>
+                      <option value="Weekly">Weekly</option>
+                      <option value="Monthly">Monthly</option>
+                      <option value="Quarterly">Quarterly</option>
+                    </select>
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="maxMembers">Max Members</label>
+                    <input type="number" id="maxMembers" name="MaxMembers" class="form-control" />
+                  </div>
+                  <div class="cbs-field cm-compact-field">
+                    <label class="cbs-label" for="maxGroupLoans">Max Group Loans</label>
+                    <input type="number" id="maxGroupLoans" name="MaxGroupLoans" class="form-control" />
+                  </div>
+                  <div class="cbs-field cm-compact-field cbs-full">
+                    <label class="cbs-label" for="groupObjective">Group Objective</label>
+                    <textarea id="groupObjective" name="GroupObjective" class="form-control" rows="2"></textarea>
+                  </div>
+                </div>
+                <div class="cm-stepper__actions">
+                  <button type="button" class="btn btn-outline-secondary" data-stepper-action="prev">Back</button>
+                  <button type="button" class="btn btn-primary" data-stepper-action="next">Next</button>
+                </div>
+              </article>
+
+              <article class="cm-stepper__panel" data-step-panel="products" data-client-scope="all">
+                <div class="cm-panel-card">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                      <h4 class="mb-0">Products &amp; Services</h4>
+                      <small class="text-muted">Filtered automatically by client type.</small>
+                    </div>
+                    <span class="badge rounded-pill text-bg-secondary" data-products-client-type>Client Type · --</span>
+                  </div>
+
+                  <div class="row g-4">
+                    <div class="col-lg-6">
+                      <div class="card cm-subcard h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center py-2">
+                          <span class="fw-semibold">Eligible Products</span>
+                          <small class="text-muted">Derived from client segment</small>
+                        </div>
+                        <div class="card-body p-0">
+                          <div class="table-responsive">
+                            <table class="table table-sm cm-table mb-0" data-table="products">
+                              <thead>
+                                <tr>
+                                  <th style="width: 3rem;">#</th>
+                                  <th>Product</th>
+                                  <th>Type</th>
+                                  <th style="width: 5rem;">Default</th>
+                                </tr>
+                              </thead>
+                              <tbody data-products-body></tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                      <div class="card cm-subcard h-100">
+                        <div class="card-header d-flex justify-content-between align-items-center py-2">
+                          <span class="fw-semibold">Service Channels</span>
+                          <div class="form-check mb-0">
+                            <input class="form-check-input" type="checkbox" id="selectAllServices"
+                              data-services-select-all />
+                            <label class="form-check-label small" for="selectAllServices">Select all services</label>
+                          </div>
+                        </div>
+                        <div class="card-body p-0">
+                          <div class="table-responsive">
+                            <table class="table table-sm cm-table mb-0" data-table="services">
+                              <thead>
+                                <tr>
+                                  <th style="width: 3rem;"></th>
+                                  <th>Service</th>
+                                  <th>Category</th>
+                                </tr>
+                              </thead>
+                              <tbody data-services-body></tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="cm-stepper__actions">
+                  <button type="button" class="btn btn-outline-secondary" data-stepper-action="prev">Back</button>
+                  <button type="button" class="btn btn-primary" data-stepper-action="next">Next</button>
+                </div>
+              </article>
+
+              <article class="cm-stepper__panel" data-step-panel="documents" data-client-scope="all">
+                <div class="cm-panel-card">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="mb-0">Document Details</h4>
+                    <button type="button" class="btn btn-outline-primary btn-sm" data-document-action="add">
+                      <i class="bi bi-plus-lg"></i>
+                      Add Document
+                    </button>
+                  </div>
+                  <div class="table-responsive">
+                    <table class="table table-sm cm-table" data-table="documents">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Document ID</th>
+                          <th>Document Type</th>
+                          <th>Location</th>
+                          <th>Remarks</th>
+                          <th>Image</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="cm-stepper__actions">
+                  <button type="button" class="btn btn-outline-secondary" data-stepper-action="prev">Back</button>
+                  <button type="button" class="btn btn-primary" data-stepper-action="next">Next</button>
+                </div>
+              </article>
+
+              <article class="cm-stepper__panel" data-step-panel="submit" data-client-scope="all">
+                <header class="cm-summary-header d-flex justify-content-between gap-3 flex-wrap">
+                  <div>
+                    <p class="cm-summary-eyebrow">Workflow summary</p>
+                    <h3 class="cm-summary-title" data-client-name>Choose a client to begin</h3>
+                    <p class="text-muted mb-0" data-client-summary>Capture the essentials, validate lookup data, then
+                      proceed with workflow actions on the right rail.</p>
+                  </div>
+                  <div class="cm-summary-status d-flex flex-column align-items-end">
+                    <span class="badge text-bg-primary" data-client-status>Draft</span>
+                    <span class="badge text-bg-secondary mt-1" data-client-workflow>Pending</span>
+                  </div>
+                </header>
+                <div class="cm-summary-badges">
+                  <span class="cm-summary-pill" data-summary="mode">Add</span>
+                  <span class="cm-summary-pill" data-summary="clientId">—</span>
+                  <span class="cm-summary-pill" data-summary="clientType">—</span>
+                  <span class="cm-summary-pill" data-summary="relationshipManager">—</span>
+                  <span class="cm-summary-pill" data-page-function-pill>Mode · Add</span>
+                </div>
+                <div class="cm-summary-grid">
+                  <article class="summary-card">
+                    <p class="summary-label">Client Name</p>
+                    <p class="summary-value" data-client-segment>Segment · —</p>
+                  </article>
+                  <article class="summary-card">
+                    <p class="summary-label">Client ID</p>
+                    <p class="summary-value" data-summary="clientId">—</p>
+                  </article>
+                  <article class="summary-card">
+                    <p class="summary-label">Relationship Manager</p>
+                    <p class="summary-value" data-client-rm>—</p>
+                  </article>
+                  <article class="summary-card">
+                    <p class="summary-label">Opened On</p>
+                    <p class="summary-value" data-client-opened>—</p>
+                  </article>
+                  <article class="summary-card">
+                    <p class="summary-label">Last Modified</p>
+                    <p class="summary-value" data-client-modified>—</p>
+                  </article>
+                </div>
+                <p class="cm-submit-hint">Use the workflow buttons on the right rail to save, approve, clear, or close
+                  this request.</p>
+                <div class="cm-stepper__actions">
+                  <button type="button" class="btn btn-outline-secondary" data-stepper-action="prev">Back</button>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <section class="cm-audit card-surface" data-collapsible data-collapse-default="collapsed"
+            data-collapsed="true">
+            <header class="cm-collapsible-head">
+              <h3 class="section-title mb-0">Behind the scenes</h3>
+              <button type="button" class="cm-collapsible-toggle" aria-expanded="false" aria-controls="cmAuditPanel"
+                data-collapse-toggle="cmAuditPanel">
+                <span class="cm-collapsible-toggle__label" data-collapse-label data-label-expand="Expand audit"
+                  data-label-collapse="Collapse audit">Expand audit</span>
+                <i class="bi bi-chevron-down" aria-hidden="true"></i>
+              </button>
+            </header>
+            <div class="cm-collapsible-panel" id="cmAuditPanel" data-collapse-panel="cmAuditPanel" hidden>
+              <div class="cm-audit__grid">
+                <article class="audit-card">
+                  <p class="card-label">Status</p>
+                  <p class="card-value" data-client-status-pill>A</p>
+                </article>
+                <article class="audit-card">
+                  <p class="card-label">Open Date</p>
+                  <p class="card-value" data-client-opened-pill>—</p>
+                </article>
+                <article class="audit-card">
+                  <p class="card-label">Closed Date</p>
+                  <p class="card-value">-</p>
+                </article>
+                <article class="audit-card">
+                  <p class="card-label">Created By</p>
+                  <p class="card-value">-</p>
+                </article>
+                <article class="audit-card">
+                  <p class="card-label">Modified By</p>
+                  <p class="card-value">-</p>
+                </article>
+                <article class="audit-card">
+                  <p class="card-label">Supervised By</p>
+                  <p class="card-value">-</p>
+                </article>
+                <article class="audit-card">
+                  <p class="card-label">Created On</p>
+                  <p class="card-value" data-client-created-pill>—</p>
+                </article>
+                <article class="audit-card">
+                  <p class="card-label">Modified On</p>
+                  <p class="card-value" data-client-modified-pill>—</p>
+                </article>
+                <article class="audit-card">
+                  <p class="card-label">Supervised On</p>
+                  <p class="card-value">-</p>
+                </article>
+              </div>
+              <div id="formToast" class="alert alert-success mt-3 d-none" role="alert"></div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <aside class="cm-legacy-actions card-surface">
+        <div class="cm-legacy-actions__group">
+          <p class="cm-legacy-actions__title">Mode switch</p>
+          <button type="button" class="cm-shell__action" data-shell-mode="View">View</button>
+          <button type="button" class="cm-shell__action" data-shell-mode="Add">Add</button>
+          <button type="button" class="cm-shell__action" data-shell-mode="Update">Edit</button>
+        </div>
+        <div class="cm-legacy-actions__group">
+          <p class="cm-legacy-actions__title">Navigation</p>
+          <button type="button" class="cm-shell__action cm-shell__action--ghost" data-stepper-action="prev">
+            <i class="bi bi-arrow-left"></i>
+            Prev
+          </button>
+          <button type="button" class="cm-shell__action cm-shell__action--ghost" data-stepper-action="next">
+            <i class="bi bi-arrow-right"></i>
+            Next
+          </button>
+        </div>
+        <div class="cm-legacy-actions__group">
+          <p class="cm-legacy-actions__title">Workflow</p>
+          <button type="button" class="cm-shell__action cm-shell__action--success" data-submit-action="save">
+            <i class="bi bi-save"></i>
+            Save
+          </button>
+          <button type="button" class="cm-shell__action cm-shell__action--accent" data-submit-action="approve" hidden>
+            <i class="bi bi-check-circle"></i>
+            Approve
+          </button>
+          <button type="button" class="cm-shell__action cm-shell__action--ghost" data-submit-action="clear"
+            data-visible-when="add">
+            <i class="bi bi-eraser"></i>
+            Clear
+          </button>
+          <button type="button" class="cm-shell__action cm-shell__action--danger" data-submit-action="cancel">
+            <i class="bi bi-x-circle"></i>
+            Close
+          </button>
+        </div>
+      </aside>
+    </form>
+  </div>
+
+  <template id="address-template">
+    <article class="address-card" data-collection-item>
+      <div class="cbs-grid cbs-grid--four cbs-grid--tight">
+        <div class="cbs-field">
+          <label class="cbs-label required">Address Type</label>
+          <select class="form-select" name="AddressTypeID" data-lookup="addressTypes" data-placeholder="--Select--"
+            required></select>
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label required">Address 1</label>
+          <input type="text" class="form-control" name="Address1" required />
+        </div>
+        <div class="cbs-field cbs-full">
+          <label class="cbs-label">Address 2</label>
+          <input type="text" class="form-control" name="Address2" />
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label">Zip Code</label>
+          <input type="text" class="form-control" name="ZipCode" />
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label required">City</label>
+          <select class="form-select" name="CityID" data-lookup="cities" required>
+            <option value="">--Select--</option>
+          </select>
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label required">Country</label>
+          <select class="form-select" name="CountryID" data-lookup="countries" required>
+            <option value="">--Select--</option>
+          </select>
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label required">Region</label>
+          <select class="form-select" name="Region" data-lookup="regions" data-placeholder="--Select--"
+            required></select>
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label required">Sub-City / Zone</label>
+          <select class="form-select" name="SubCityZone" data-lookup="subCityZones" data-placeholder="--Select--"
+            required></select>
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label required">Wereda</label>
+          <input type="text" class="form-control" name="Wereda" required />
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label required">Kebele</label>
+          <input type="text" class="form-control" name="Kebele" required />
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label required">House Number</label>
+          <input type="text" class="form-control" name="HouseNumber" required />
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label">Language</label>
+          <select class="form-select" name="Language" data-lookup="languages" data-placeholder="--Select--"></select>
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label">Phone (Work)</label>
+          <input type="text" class="form-control" name="PhoneWork" />
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label">Phone (Home)</label>
+          <input type="text" class="form-control" name="PhoneHome" />
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label">Mobile</label>
+          <input type="text" class="form-control" name="Mobile" />
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label">Email ID</label>
+          <input type="email" class="form-control" name="Email" />
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label">Fax No</label>
+          <input type="text" class="form-control" name="FaxNo" />
+        </div>
+        <div class="cbs-field">
+          <label class="cbs-label">TIN Number</label>
+          <input type="text" class="form-control" name="TINNumber" />
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <template id="document-row-template">
+    <tr data-document-row>
+      <td data-document-index></td>
+      <td>
+        <select class="form-select" name="DocumentID" data-lookup="documents" data-placeholder="--Select--"
+          required></select>
+      </td>
+      <td>
+        <select class="form-select" name="DocumentTypeID" data-lookup="documentTypes" data-placeholder="--Select--"
+          required></select>
+      </td>
+      <td>
+        <input type="text" class="form-control" name="Description" placeholder="Auto" readonly />
+      </td>
+      <td>
+        <input type="text" class="form-control" name="Remarks" />
+      </td>
+      <td class="text-nowrap">
+        <input type="file" class="form-control" data-document-file />
+      </td>
+      <td class="text-end">
+        <div class="btn-group btn-group-sm">
+          <button type="button" class="btn btn-outline-secondary" data-document-preview title="Preview">
+            <i class="bi bi-eye"></i>
+          </button>
+          <button type="button" class="btn btn-outline-success" data-document-download title="Download">
+            <i class="bi bi-download"></i>
+          </button>
+          <button type="button" class="btn btn-outline-danger" data-document-remove title="Remove">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </td>
+    </tr>
+  </template>
+  <div class="modal fade" id="clientLookupModal" tabindex="-1" aria-labelledby="clientLookupModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content cm-lookup">
+        <div class="modal-header cm-lookup__header">
+          <div>
+            <p class="cm-lookup__eyebrow">Customer Maintenance</p>
+            <h5 class="modal-title" id="clientLookupModalLabel">Find an Existing Client</h5>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body cm-lookup__body">
+          <form class="cm-lookup__filters row g-3 align-items-end" data-lookup-form>
+            <div class="col-md-4">
+              <label class="form-label">Client ID</label>
+              <div class="input-group input-group-sm">
+                <select class="form-select" data-lookup-mode="clientId">
+                  <option value="Like">Contains</option>
+                  <option value="Exact">Exact</option>
+                </select>
+                <input type="text" class="form-control" data-lookup-field="clientId" placeholder="e.g. CSK00092" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Name</label>
+              <div class="input-group input-group-sm">
+                <select class="form-select" data-lookup-mode="Name">
+                  <option value="Like">Contains</option>
+                  <option value="Exact">Exact</option>
+                </select>
+                <input type="text" class="form-control" data-lookup-field="Name" placeholder="Client name" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">National ID</label>
+              <div class="input-group input-group-sm">
+                <select class="form-select" data-lookup-mode="IDNumber">
+                  <option value="Like">Contains</option>
+                  <option value="Exact">Exact</option>
+                </select>
+                <input type="text" class="form-control" data-lookup-field="IDNumber" placeholder="e.g. 32456789" />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Mobile</label>
+              <div class="input-group input-group-sm">
+                <select class="form-select" data-lookup-mode="MobileNo">
+                  <option value="Like">Contains</option>
+                  <option value="Exact">Exact</option>
+                </select>
+                <input type="text" class="form-control" data-lookup-field="MobileNo" placeholder="e.g. 0712..." />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Legacy Account</label>
+              <div class="input-group input-group-sm">
+                <select class="form-select" data-lookup-mode="LegacyAccountID">
+                  <option value="Like">Contains</option>
+                  <option value="Exact">Exact</option>
+                </select>
+                <input type="text" class="form-control" data-lookup-field="LegacyAccountID" placeholder="e.g. AC123" />
+              </div>
+            </div>
+            <div class="col-md-4 text-md-end cm-lookup__actions">
+              <button type="button" class="btn btn-outline-secondary" data-lookup-reset>Reset</button>
+              <button type="submit" class="btn btn-primary" data-lookup-submit>
+                <i class="bi bi-search"></i>
+                Search
+              </button>
+            </div>
+          </form>
+
+          <div class="cm-lookup__results card-surface">
+            <div class="table-responsive">
+              <table class="table table-sm table-hover align-middle mb-0 cm-lookup__table">
+                <thead>
+                  <tr>
+                    <th scope="col">Client ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">National ID</th>
+                    <th scope="col">Mobile</th>
+                    <th scope="col">Legacy Account</th>
+                    <th scope="col" class="text-end">Action</th>
+                  </tr>
+                </thead>
+                <tbody data-lookup-results></tbody>
+              </table>
+            </div>
+            <div class="cm-lookup__empty" data-lookup-empty>
+              Enter at least one filter above and click Search to query Core Banking clients.
+            </div>
+            <div class="cm-lookup__loading d-none" data-lookup-loading>
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer cm-lookup__footer">
+          <small class="text-muted me-auto">Results powered by the Shared/GetSystemSearch endpoint.</small>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../../assets/js/config.js"></script>
+  <script src="../../assets/js/data/countries.js"></script>
+  <script src="../../assets/js/services/shared/coreApi.js"></script>
+  <script src="../../assets/js/services/clientService.js"></script>
+  <script src="../../assets/js/services/shared/searchService.js"></script>
+  <script src="../../assets/js/services/lookupService.js"></script>
+  <script src="../../assets/js/models/customer-management/clientFormModel.js"></script>
+  <script src="../../assets/js/ui/lookupField.js"></script>
+  <script src="../../assets/js/auth/auth.config.js"></script>
+  <script src="../../assets/js/auth/auth.service.js"></script>
+  <script src="../../assets/js/app.js"></script>
+  <script src="../../assets/js/pages/customer-management/client-maintenance.js"></script>
+</body>
+
+</html>

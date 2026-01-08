@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Enterprise Core Banking Console</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <!-- Auth Scripts -->
+  <script src="assets/js/auth/auth.config.js"></script>
+  <script src="assets/js/auth/auth.service.js"></script>
+</head>
+
+<body class="copilot-theme" data-page="module-dashboard">
+  <header class="legacy-status-bar glass-effect border-0">
+    <div class="status-pill">Date: 08-May-2025</div>
+    <div class="status-pill">Bank Name: 032 · DEMO BANK</div>
+    <div class="status-pill">Branch: 000 · HEAD OFFICE-ADMIN</div>
+    <div class="status-pill">User: <span data-user-name>CSADM</span></div>
+  </header>
+
+  <div class="legacy-shell" data-shell>
+    <aside class="legacy-nav glass-effect" data-nav-panel>
+      <div class="nav-header">000-<span data-user-name>CSADM</span> · 8/5/2025</div>
+      <div class="legacy-nav__layout">
+        <div class="nav-tree" data-nav-tree>
+          <button class="nav-item" data-launch-modal="reportsModal" data-module="reports">Reports</button>
+          <button class="nav-item" data-launch-modal="reportsModal">Report Writer</button>
+          <div class="nav-group">Core Modules</div>
+          <button class="nav-item" data-launch-modal="clientModal" data-module="customer" data-nav-default>Customer
+            Management</button>
+          <button class="nav-item" data-launch-modal="accountsModal" data-module="accounts">Accounts Suite</button>
+          <button class="nav-item" data-launch-modal="loansModal" data-module="loans">Loans Origination</button>
+          <button class="nav-item" data-launch-modal="workflowModal" data-module="workflow">Workflow Desk</button>
+          <button class="nav-item" data-launch-modal="treasuryModal" data-module="treasury">Treasury</button>
+          <button class="nav-item" data-launch-modal="securityModal" data-module="security">System Security</button>
+          <div class="nav-group">Utilities</div>
+          <button class="nav-item" data-launch-modal="systemModal" data-module="security">System BR.NET</button>
+          <button class="nav-item">Clearing</button>
+          <button class="nav-item">Swift</button>
+          <button class="nav-item">Admin Console</button>
+        </div>
+        <div class="nav-sub-panel bg-transparent">
+          <p class="nav-subtitle" data-nav-subtitle>Sub Modules</p>
+          <div class="nav-sub-list" data-nav-sub-list>
+            <p class="nav-sub-placeholder">Hover over a main module to preview shortcuts.</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <section class="legacy-workspace glass-effect">
+      <div class="workspace-hero text-center">
+        <div class="workspace-pill">
+          <span class="pill-icon"><i class="fa-solid fa-bolt"></i></span>
+          <span>Nimble 1.0</span>
+        </div>
+        <h2>Hello, <span class="fw-bold">Mike</span>!</h2>
+        <p>
+          Your <a href="#">financial command center</a> is ready. Manage, monitor, and grow your cooperative with our
+          <a href="#">cutting-edge platform</a>.
+        </p>
+      </div>
+
+      <div class="row g-3 workspace-stats">
+        <div class="col-12 col-sm-6 col-xl-3">
+          <article class="stat-card">
+            <div class="stat-icon icon-users"><i class="fa-solid fa-user-group"></i></div>
+            <div>
+              <p class="stat-label">Members</p>
+              <p class="stat-value">254</p>
+              <p class="stat-hint text-success">+18 joined this week</p>
+            </div>
+          </article>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <article class="stat-card">
+            <div class="stat-icon icon-assets"><i class="fa-solid fa-sack-dollar"></i></div>
+            <div>
+              <p class="stat-label">Total Assets</p>
+              <p class="stat-value">70.68M</p>
+              <p class="stat-hint text-success">+4.3% MoM</p>
+            </div>
+          </article>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <article class="stat-card">
+            <div class="stat-icon icon-transactions"><i class="fa-solid fa-wave-square"></i></div>
+            <div>
+              <p class="stat-label">Transactions Today</p>
+              <p class="stat-value">482</p>
+              <p class="stat-hint text-info">Peak · 11:00 AM</p>
+            </div>
+          </article>
+        </div>
+        <div class="col-12 col-sm-6 col-xl-3">
+          <article class="stat-card">
+            <div class="stat-icon icon-amount"><i class="fa-solid fa-clock"></i></div>
+            <div>
+              <p class="stat-label">Today's Volume</p>
+              <p class="stat-value">20.00K</p>
+              <p class="stat-hint text-muted">Settlements close in 1h 12m</p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="row g-4 align-items-stretch mt-1">
+        <div class="col-lg-7">
+          <article class="feature-panel h-100">
+            <header class="panel-header">
+              <div>
+                <p class="panel-eyebrow">Realtime Flow</p>
+                <h4 class="panel-title">Operational pulse</h4>
+              </div>
+              <span class="panel-chip panel-chip--success">Stable</span>
+            </header>
+            <ul class="pulse-list">
+              <li>
+                <div class="pulse-dot bg-success"></div>
+                <div>
+                  <p class="pulse-title">Maker-checker queue cleared</p>
+                  <small>08:45 AM · Treasury Desk · 9 approvals processed</small>
+                </div>
+              </li>
+              <li>
+                <div class="pulse-dot bg-primary"></div>
+                <div>
+                  <p class="pulse-title">New group onboarding</p>
+                  <small>10:12 AM · Sunrise Sacco · 38 members imported</small>
+                </div>
+              </li>
+              <li>
+                <div class="pulse-dot bg-warning"></div>
+                <div>
+                  <p class="pulse-title">Limit review pending</p>
+                  <small>11:03 AM · Wholesale credit · SLAs at 78%</small>
+                </div>
+              </li>
+            </ul>
+          </article>
+        </div>
+        <div class="col-lg-5">
+          <article class="feature-panel h-100">
+            <header class="panel-header">
+              <div>
+                <p class="panel-eyebrow">Command Utilisation</p>
+                <h4 class="panel-title">Experience radar</h4>
+              </div>
+            </header>
+            <div class="radial-meter" style="--meter-progress: 78%; --meter-color: #6c63ff">
+              <span>78%</span>
+              <small>Core Ops</small>
+            </div>
+            <ul class="health-list">
+              <li>
+                <div>
+                  <strong>Payments Mesh</strong>
+                  <small>Latency 142ms</small>
+                </div>
+                <span class="badge rounded-pill bg-success">Green</span>
+              </li>
+              <li>
+                <div>
+                  <strong>Loan Origination</strong>
+                  <small>Docs queue 6 deep</small>
+                </div>
+                <span class="badge rounded-pill bg-warning text-dark">Watch</span>
+              </li>
+              <li>
+                <div>
+                  <strong>Account Factory</strong>
+                  <small>Template refresh in 12m</small>
+                </div>
+                <span class="badge rounded-pill bg-info text-dark">Syncing</span>
+              </li>
+            </ul>
+          </article>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <footer class="legacy-taskbar">
+    <div class="taskbar-left">
+      <button class="start-button" data-start-toggle>
+        <i class="fa-brands fa-windows"></i>
+        <span>Start</span>
+      </button>
+      <div class="taskbar-divider"></div>
+      <div class="taskbar-windows" data-taskbar></div>
+    </div>
+    <div class="taskbar-clock">
+      <span>08 May 2025</span>
+      <strong>11:24 AM</strong>
+    </div>
+
+    <div class="start-menu" data-start-menu>
+      <div class="start-menu__profile">
+        <div>
+          <p class="mb-0" data-user-name>CSADM</p>
+          <small>Enterprise Operator</small>
+        </div>
+        <button class="btn btn-sm btn-outline-light" data-logout>Logout</button>
+      </div>
+      <div class="start-menu__layout">
+        <div class="start-menu__modules">
+          <button class="start-module is-active" data-module="customer" data-default="true">
+            <i class="fas fa-address-card"></i>
+            <span>Customer Management</span>
+          </button>
+          <button class="start-module" data-module="accounts">
+            <i class="fas fa-piggy-bank"></i>
+            <span>Accounts Suite</span>
+          </button>
+          <button class="start-module" data-module="loans">
+            <i class="fas fa-building-columns"></i>
+            <span>Loans Origination</span>
+          </button>
+          <button class="start-module" data-module="treasury">
+            <i class="fas fa-coins"></i>
+            <span>Treasury</span>
+          </button>
+          <button class="start-module" data-module="workflow">
+            <i class="fas fa-route"></i>
+            <span>Workflow Desk</span>
+          </button>
+          <button class="start-module" data-module="security">
+            <i class="fas fa-shield"></i>
+            <span>System Security</span>
+          </button>
+        </div>
+        <div class="start-menu__submenu" data-submenu-panel>
+          <p class="column-title" data-submenu-title>Customer Management</p>
+          <div class="submenu-list" data-submenu-list></div>
+        </div>
+      </div>
+    </div>
+    <div class="start-overlay" data-start-overlay></div>
+  </footer>
+
+  <!-- Modals -->
+  <div class="modal fade legacy-modal" id="clientModal" data-window-title="Customer" data-window-icon="fas fa-users"
+    tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title mb-0">Client Maintenance</h4>
+          <div class="window-controls" data-window-controls>
+            <button type="button" class="window-control" data-window-action="minimize" aria-label="Minimize window">
+              <i class="far fa-window-minimize"></i>
+            </button>
+            <button type="button" class="window-control" data-window-action="maximize" aria-label="Maximize window">
+              <i class="far fa-square"></i>
+            </button>
+            <button type="button" class="window-control window-control--close" data-window-action="close"
+              aria-label="Close window">
+              <i class="far fa-times-circle"></i>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body modal-body--iframe">
+          <iframe class="legacy-modal__iframe" src="modules/customer-management/client-maintenance.html"
+            title="Client Maintenance Workspace" loading="lazy"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade legacy-modal" id="overdraftModal" data-window-title="Overdraft"
+    data-window-icon="fas fa-wave-square" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Overdraft Setup</h4>
+          <div class="window-controls" data-window-controls>
+            <button type="button" class="window-control" data-window-action="minimize" aria-label="Minimize window">
+              <i class="far fa-window-minimize"></i>
+            </button>
+            <button type="button" class="window-control" data-window-action="maximize" aria-label="Maximize window">
+              <i class="far fa-square"></i>
+            </button>
+            <button type="button" class="window-control window-control--close" data-window-action="close"
+              aria-label="Close window">
+              <i class="far fa-times-circle"></i>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">Account Number</label>
+              <input type="text" class="form-control" placeholder="00123456789" />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Limit</label>
+              <input type="number" class="form-control" placeholder="250000" />
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Currency</label>
+              <select class="form-select">
+                <option>KES</option>
+                <option>USD</option>
+                <option>UGX</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Tenor (months)</label>
+              <input type="number" class="form-control" placeholder="12" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Effective Date</label>
+              <input type="date" class="form-control" />
+            </div>
+            <div class="col-12">
+              <label class="form-label">Remarks</label>
+              <textarea class="form-control" rows="3" placeholder="Notes for credit approver..."></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary">Submit for Approval</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade legacy-modal" id="accountsModal" data-window-title="Accounts"
+    data-window-icon="fas fa-piggy-bank" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Accounts Suite</h4>
+          <div class="window-controls" data-window-controls>
+            <button type="button" class="window-control" data-window-action="minimize" aria-label="Minimize window">
+              <i class="far fa-window-minimize"></i>
+            </button>
+            <button type="button" class="window-control" data-window-action="maximize" aria-label="Maximize window">
+              <i class="far fa-square"></i>
+            </button>
+            <button type="button" class="window-control window-control--close" data-window-action="close"
+              aria-label="Close window">
+              <i class="far fa-times-circle"></i>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <p>Manage CASA, term, and escrow products from a single control center.</p>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Product Code</label>
+              <input type="text" class="form-control" placeholder="CASA-001" />
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Currency</label>
+              <select class="form-select">
+                <option>KES</option>
+                <option>USD</option>
+                <option>UGX</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Description</label>
+              <textarea class="form-control" rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary">Save Product</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade legacy-modal" id="loansModal" data-window-title="Loans" data-window-icon="fas fa-landmark"
+    tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Loans Origination</h4>
+          <div class="window-controls" data-window-controls>
+            <button type="button" class="window-control" data-window-action="minimize" aria-label="Minimize window">
+              <i class="far fa-window-minimize"></i>
+            </button>
+            <button type="button" class="window-control" data-window-action="maximize" aria-label="Maximize window">
+              <i class="far fa-square"></i>
+            </button>
+            <button type="button" class="window-control window-control--close" data-window-action="close"
+              aria-label="Close window">
+              <i class="far fa-times-circle"></i>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <p>Track origination milestones, limit approvals, and disbursement readiness from one place.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade legacy-modal" id="treasuryModal" data-window-title="Treasury" data-window-icon="fas fa-coins"
+    tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Treasury Desk</h4>
+          <div class="window-controls" data-window-controls>
+            <button type="button" class="window-control" data-window-action="minimize" aria-label="Minimize window">
+              <i class="far fa-window-minimize"></i>
+            </button>
+            <button type="button" class="window-control" data-window-action="maximize" aria-label="Maximize window">
+              <i class="far fa-square"></i>
+            </button>
+            <button type="button" class="window-control window-control--close" data-window-action="close"
+              aria-label="Close window">
+              <i class="far fa-times-circle"></i>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <p>Monitor FX positions, liquidity sweeps, and dealer allocations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade legacy-modal" id="workflowModal" data-window-title="Workflow" data-window-icon="fas fa-route"
+    tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Workflow Desk</h4>
+          <div class="window-controls" data-window-controls>
+            <button type="button" class="window-control" data-window-action="minimize" aria-label="Minimize window">
+              <i class="far fa-window-minimize"></i>
+            </button>
+            <button type="button" class="window-control" data-window-action="maximize" aria-label="Maximize window">
+              <i class="far fa-square"></i>
+            </button>
+            <button type="button" class="window-control window-control--close" data-window-action="close"
+              aria-label="Close window">
+              <i class="far fa-times-circle"></i>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <p>Coordinate maker-checker streams, monitor SLAs, and unblock escalations.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+
+</html>

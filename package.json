@@ -1,0 +1,11 @@
+{
+  "name": "BRNET-FRONTEND-V8",
+  "version": "0.1.0",
+  "description": "Static HTML/Bootstrap prototype for the core banking suite",
+  "scripts": {
+    "dev": "live-server public --no-browser --watch=public"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
